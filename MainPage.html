@@ -1,0 +1,122 @@
+<html>
+<head>
+<link rel="stylesheet"  href="style.css">
+	 <link rel="stylesheet" href="qwe.css">
+	<link rel="stylesheet"  href="iThing.css">	
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<style>
+
+#top-left {
+   height: 100%;
+}
+#bottom-left {
+    background-color: green;
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+}
+
+#left-col{
+    position: absolute;
+    overflow: auto;
+    right: 30%;
+    left: 0;
+    top: 0;
+    bottom: 30px;
+	margin-left:45px;
+    
+    height: 100%; }
+
+#right-col {
+    position:absolute;
+    overflow: auto;
+    left: 70%;
+    right: 0;
+    top: 0;
+    bottom: 30px;   
+    width: 70%;
+    height: 100%; 
+	margin-right:45px;
+    }
+#left-left-col{
+    position: absolute;
+    overflow: auto;
+    left: 50%;
+    right: 30%;
+    top: 0;
+    bottom: 30px;
+    
+    height: 100%; }
+
+</style>
+</head>
+<body>
+<div id="content">
+  <div id="left-col">
+  Account info   
+	<div id="left-left-col">
+	Billing Info
+	</div>
+	<div id="slider"></div> 
+	<p></p>
+	<p></p>
+	<br/>
+	<p>Starting Date</p>
+	<input type="text" id="result1" value="" ></div>
+	<br/>
+	<br/>
+	
+	<p>Ending date<input type="text" id="result2" value="" ></div>	</p>	
+<script src="jQDateRangeSlider-min.js"></script>
+<script src="jQDateRangeSlider-withRuler-min.js"></script>
+	  <br/>
+	<script>
+	var months = [ "Oct","Nov", "Dec","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", ];
+  $("#slider").dateRangeSlider({
+    bounds: {min: new Date(2014, 0, 1), max: new Date(2015, 11, 31, 12, 59, 59)},
+    defaultValues: {min: new Date(2014, 1, 10), max: new Date(2015, 4, 22)},
+    scales: [{
+      first: function(value){ return value; },
+      end: function(value) {return value; },
+      next: function(value){
+        var next = new Date(value);
+        return new Date(next.setMonth(value.getMonth() + 1));
+      },
+       label: function(value){	  
+        return months[value.getMonth()];
+		
+      },
+      format: function(tickContainer, tickStart, tickEnd){
+	  
+        tickContainer.addClass("myCustomClass");	
+		
+      }
+    }]
+	
+  });
+$("#slider").bind("valuesChanged", function(e, data){
+console.log(data.values.min+""+data.values.max);
+var d = new Date(data.values.min);
+var str = $.datepicker.formatDate('dd/mm/yy', d);
+ $('#result1').val(str);
+ var d1 = new Date(data.values.max);
+var str1 = $.datepicker.formatDate('dd/mm/yy', d1);
+ $('#result2').val(str1);
+console.log(str+""+str1);
+});
+
+  </script>
+    <table border="1" width="100%" height="auto">
+	<tr padding="6px" >Subscription Plan</tr>
+	<tr>
+	<td></td>
+	<td></td>
+	</tr>
+	</table>
+  </div>
+
+  <div id="right-col">invoice info
+  </div>
+</div></body>
+</html>
